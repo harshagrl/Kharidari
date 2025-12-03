@@ -26,8 +26,7 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "OK", message: "Server is running" });
 });
 
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/shopping-cart";
+const MONGODB_URI = process.env.MONGODB_URI;
 
 mongoose
   .connect(MONGODB_URI)
