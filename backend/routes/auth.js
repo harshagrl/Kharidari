@@ -6,6 +6,9 @@ import { protect } from "../middleware/auth.js";
 
 const router = express.Router();
 
+const passwordComplexityRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
 const generateToken = (id) => {
   if (!process.env.JWT_SECRET) {
     throw new Error("JWT_SECRET is not defined in environment variables");
@@ -21,8 +24,12 @@ router.post(
     body("name").trim().notEmpty().withMessage("Name is required"),
     body("email").isEmail().withMessage("Please provide a valid email"),
     body("password")
-      .isLength({ min: 6 })
-      .withMessage("Password must be at least 6 characters"),
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters long")
+      .matches(passwordComplexityRegex)
+      .withMessage(
+        "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character"
+      ),
   ],
   async (req, res) => {
     try {
