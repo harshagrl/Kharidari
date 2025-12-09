@@ -65,7 +65,8 @@ const products = [
     description:
       "Non-slip yoga mat with carrying strap, perfect for all types of yoga practice.",
     price: 29.99,
-    image: "https://images.unsplash.com/photo-1601925260368-ae2f83d1212a?w=500",
+    image:
+      "https://m.media-amazon.com/images/I/61d049-EBiL._AC_UF894,1000_QL80_.jpg",
     category: "Sports",
     stock: 60,
     rating: 4.2,
