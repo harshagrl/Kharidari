@@ -88,7 +88,7 @@ Edit the `.env` file with your MongoDB connection string:
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/shopping-cart
+MONGODB_URI=mongodb://localhost:27017/
 JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
 NODE_ENV=development
 ```
