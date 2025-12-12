@@ -10,7 +10,8 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(to bottom, #f8fafc, #ffffff);
+    background: linear-gradient(180deg, #0b0b0d 0%, #0f1113 40%, #111214 100%);
+    color: rgba(229,231,235,1);
   }
 
   code {
@@ -21,11 +22,11 @@
 
 @layer utilities {
   .gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #3b3b3f 0%, #1f2933 100%);
   }
   
   .gradient-text {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #9f7aea 0%, #f472b6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

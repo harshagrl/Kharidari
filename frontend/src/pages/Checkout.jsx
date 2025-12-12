@@ -81,20 +81,20 @@ const Checkout = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+      <h1 className="text-3xl font-bold text-white mb-8">Checkout</h1>
 
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 lg:grid-cols-3 gap-8"
       >
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+          <div className="bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+            <h2 className="text-xl font-bold text-white mb-4">
               Shipping Address
             </h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Full Name
                 </label>
                 <input
@@ -103,11 +103,11 @@ const Checkout = () => {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Address
                 </label>
                 <input
@@ -116,12 +116,12 @@ const Checkout = () => {
                   value={formData.address}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-600"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-300 mb-1">
                     City
                   </label>
                   <input
@@ -130,11 +130,11 @@ const Checkout = () => {
                     value={formData.city}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-600"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-300 mb-1">
                     Postal Code
                   </label>
                   <input
@@ -143,12 +143,12 @@ const Checkout = () => {
                     value={formData.postalCode}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-600"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Country
                 </label>
                 <input
@@ -157,14 +157,14 @@ const Checkout = () => {
                   value={formData.country}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-600"
                 />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+          <div className="bg-gray-800 rounded-lg shadow-md p-6">
+            <h2 className="text-xl font-bold text-white mb-4">
               Payment Method
             </h2>
             <div className="space-y-2">
@@ -206,10 +206,8 @@ const Checkout = () => {
         </div>
 
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
-              Order Summary
-            </h2>
+          <div className="bg-gray-800 rounded-lg shadow-md p-6 sticky top-4">
+            <h2 className="text-xl font-bold text-white mb-4">Order Summary</h2>
             <div className="space-y-2 mb-4">
               {cart.items.map((item) => (
                 <div key={item._id} className="flex justify-between text-sm">
@@ -222,29 +220,29 @@ const Checkout = () => {
                 </div>
               ))}
             </div>
-            <div className="border-t border-gray-200 pt-4 space-y-2">
+            <div className="border-t border-gray-700 pt-4 space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-600">Items</span>
+                <span className="text-gray-300">Items</span>
                 <span className="font-semibold">
                   ${totals.itemsPrice.toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Shipping</span>
+                <span className="text-gray-300">Shipping</span>
                 <span className="font-semibold">
                   ${totals.shippingPrice.toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Tax</span>
+                <span className="text-gray-300">Tax</span>
                 <span className="font-semibold">
                   ${totals.taxPrice.toFixed(2)}
                 </span>
               </div>
               <div className="border-t border-gray-200 pt-2 mt-2">
                 <div className="flex justify-between">
-                  <span className="text-lg font-bold">Total</span>
-                  <span className="text-lg font-bold">
+                  <span className="text-lg font-bold text-white">Total</span>
+                  <span className="text-lg font-bold text-white">
                     ${totals.totalPrice.toFixed(2)}
                   </span>
                 </div>

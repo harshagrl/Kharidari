@@ -116,4 +116,29 @@ router.get("/me", protect, async (req, res) => {
   }
 });
 
+router.put("/me", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const { name, email, password } = req.body;
+    if (name) user.name = name;
+    if (email && email !== user.email) {
+      const exists = await User.findOne({ email });
+      if (exists && exists._id.toString() !== user._id.toString()) {
+        return res.status(400).json({ message: "Email already in use" });
+      }
+      user.email = email;
+    }
+    if (password) user.password = password;
+
+    await user.save();
+
+    res.json({ _id: user._id, name: user.name, email: user.email });
+  } catch (error) {
+    console.error("Update profile error:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export default router;

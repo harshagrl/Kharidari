@@ -110,7 +110,7 @@ const Login = () => {
 
   const getInputClassName = (fieldName) => {
     const baseClass =
-      "appearance-none relative block w-full px-4 py-3 border-2 placeholder-gray-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 transition-all";
+      "appearance-none relative block w-full px-4 py-3 border-2 placeholder-gray-400 text-white rounded-xl bg-gray-700 focus:outline-none focus:ring-2 transition-all";
     if (touched[fieldName] && errors[fieldName]) {
       return `${baseClass} border-red-500 focus:border-red-500 focus:ring-red-200`;
     } else if (
@@ -118,15 +118,15 @@ const Login = () => {
       !errors[fieldName] &&
       formData[fieldName]
     ) {
-      return `${baseClass} border-green-500 focus:border-green-500 focus:ring-green-200`;
+      return `${baseClass} border-green-500 focus:border-green-500 focus:ring-green-300`;
     }
-    return `${baseClass} border-gray-200 focus:border-purple-500 focus:ring-purple-200`;
+    return `${baseClass} border-gray-600 focus:border-purple-600 focus:ring-purple-600`;
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full animate-fade-in">
-        <div className="bg-white rounded-3xl shadow-2xl p-8 lg:p-10">
+        <div className="bg-gray-800 rounded-3xl shadow-2xl p-8 lg:p-10">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl mb-4">
               <svg
@@ -143,10 +143,10 @@ const Login = () => {
                 />
               </svg>
             </div>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">
+            <h2 className="text-3xl font-extrabold text-white mb-2">
               Welcome Back
             </h2>
-            <p className="text-gray-600">Sign in to your account to continue</p>
+            <p className="text-gray-300">Sign in to your account to continue</p>
           </div>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -154,7 +154,7 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-semibold text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-gray-300 mb-2"
                 >
                   Email Address <span className="text-red-500">*</span>
                 </label>
@@ -206,7 +206,7 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-semibold text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-gray-300 mb-2"
                 >
                   Password <span className="text-red-500">*</span>
                 </label>
@@ -293,11 +293,11 @@ const Login = () => {
             </div>
 
             <div className="text-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-300">
                 Don't have an account?{" "}
                 <Link
                   to="/register"
-                  className="font-semibold text-purple-600 hover:text-purple-700 transition-colors"
+                  className="font-semibold text-pink-300 hover:text-pink-200 transition-colors"
                 >
                   Create one now
                 </Link>

@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-sm bg-white/95">
+    <nav className="bg-gray-800/80 shadow-lg sticky top-0 z-50 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center">
@@ -40,20 +40,26 @@ const Navbar = () => {
             <div className="hidden sm:ml-10 sm:flex sm:space-x-6">
               <Link
                 to="/"
-                className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors border-b-2 border-transparent hover:border-purple-600"
+                className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-200 hover:text-white transition-colors border-b-2 border-transparent hover:border-white"
               >
                 Home
               </Link>
               <Link
                 to="/products"
-                className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors border-b-2 border-transparent hover:border-purple-600"
+                className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-200 hover:text-white transition-colors border-b-2 border-transparent hover:border-white"
               >
                 Products
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-200 hover:text-white transition-colors border-b-2 border-transparent hover:border-white"
+              >
+                Contact
               </Link>
               {user && (
                 <Link
                   to="/orders"
-                  className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors border-b-2 border-transparent hover:border-purple-600"
+                  className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-200 hover:text-white transition-colors border-b-2 border-transparent hover:border-white"
                 >
                   Orders
                 </Link>
@@ -65,7 +71,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/cart"
-                  className="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-600 transition-all duration-200"
+                  className="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 text-gray-200 hover:text-white transition-all duration-200"
                 >
                   <svg
                     className="w-6 h-6"
@@ -86,13 +92,15 @@ const Navbar = () => {
                     </span>
                   )}
                 </Link>
-                <div className="hidden md:flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-50 to-pink-50 rounded-full">
-                  <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                    {user.name.charAt(0).toUpperCase()}
-                  </div>
-                  <span className="text-sm font-medium text-gray-700">
-                    Hi, {user.name.split(" ")[0]}
-                  </span>
+                <div className="hidden md:flex items-center space-x-2 px-3 py-2 bg-gray-800 rounded-full">
+                  <Link to="/profile" className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-sm font-medium text-gray-200">
+                      Hi, {user.name.split(" ")[0]}
+                    </span>
+                  </Link>
                 </div>
                 <button
                   onClick={handleLogout}
@@ -105,7 +113,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="px-5 py-2.5 text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors"
+                  className="px-5 py-2.5 text-sm font-semibold text-gray-200 hover:text-white transition-colors"
                 >
                   Login
                 </Link>

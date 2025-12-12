@@ -50,8 +50,8 @@ const ProductDetail = () => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-purple-200 border-t-purple-600"></div>
-          <p className="mt-4 text-gray-600 text-lg">Loading product...</p>
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-gray-600 border-t-purple-600"></div>
+          <p className="mt-4 text-gray-300 text-lg">Loading product...</p>
         </div>
       </div>
     );
@@ -62,11 +62,11 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <button
           onClick={() => navigate("/products")}
-          className="mb-6 flex items-center text-purple-600 hover:text-purple-700 font-semibold transition-colors"
+          className="mb-6 flex items-center text-pink-300 hover:text-pink-200 font-semibold transition-colors"
         >
           <svg
             className="w-5 h-5 mr-2"
@@ -84,10 +84,10 @@ const ProductDetail = () => {
           Back to Products
         </button>
 
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden animate-fade-in">
+        <div className="bg-gray-800 rounded-3xl shadow-2xl overflow-hidden animate-fade-in">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-            <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-8 lg:p-12">
-              <div className="relative aspect-square rounded-2xl overflow-hidden bg-white shadow-lg">
+            <div className="bg-gradient-to-br from-gray-700 to-gray-800 p-8 lg:p-12">
+              <div className="relative aspect-square rounded-2xl overflow-hidden bg-gray-900 shadow-md">
                 <img
                   src={product.image || "https://via.placeholder.com/600"}
                   alt={product.name}
@@ -98,10 +98,10 @@ const ProductDetail = () => {
 
             <div className="p-8 lg:p-12 flex flex-col justify-center">
               <div className="mb-6">
-                <span className="inline-block px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-semibold mb-4">
+                <span className="inline-block px-4 py-2 bg-gradient-to-r from-purple-800 to-pink-800 text-pink-200 rounded-full text-sm font-semibold mb-4">
                   {product.category}
                 </span>
-                <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
+                <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-4">
                   {product.name}
                 </h1>
                 <div className="flex items-center space-x-4 mb-6">
@@ -126,7 +126,7 @@ const ProductDetail = () => {
                           </svg>
                         ))}
                       </div>
-                      <span className="text-gray-600 font-semibold">
+                      <span className="text-gray-300 font-semibold">
                         {product.rating.toFixed(1)} ({product.numReviews}{" "}
                         reviews)
                       </span>
@@ -135,21 +135,21 @@ const ProductDetail = () => {
                 </div>
               </div>
 
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
                 {product.description}
               </p>
 
               <div className="space-y-4 mb-8">
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                  <span className="text-gray-600 font-semibold">
+                <div className="flex items-center justify-between p-4 bg-gray-800 rounded-xl">
+                  <span className="text-gray-300 font-semibold">
                     Availability
                   </span>
                   {product.stock > 0 ? (
-                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full font-bold">
+                    <span className="px-4 py-2 bg-green-900 text-green-300 rounded-full font-bold">
                       {product.stock} in stock
                     </span>
                   ) : (
-                    <span className="px-4 py-2 bg-red-100 text-red-700 rounded-full font-bold">
+                    <span className="px-4 py-2 bg-red-900 text-red-300 rounded-full font-bold">
                       Out of Stock
                     </span>
                   )}
@@ -158,24 +158,24 @@ const ProductDetail = () => {
 
               {product.stock > 0 && (
                 <div className="mb-8">
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  <label className="block text-sm font-semibold text-gray-300 mb-3">
                     Quantity
                   </label>
                   <div className="flex items-center space-x-4">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-12 h-12 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-xl font-bold text-xl transition-colors"
+                      className="w-12 h-12 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-xl font-bold text-xl transition-colors text-white"
                     >
                       −
                     </button>
-                    <div className="w-20 h-12 flex items-center justify-center bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl font-bold text-xl text-gray-900">
+                    <div className="w-20 h-12 flex items-center justify-center bg-gradient-to-r from-purple-800 to-pink-800 rounded-xl font-bold text-xl text-white">
                       {quantity}
                     </div>
                     <button
                       onClick={() =>
                         setQuantity(Math.min(product.stock, quantity + 1))
                       }
-                      className="w-12 h-12 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-xl font-bold text-xl transition-colors"
+                      className="w-12 h-12 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-xl font-bold text-xl transition-colors text-white"
                     >
                       +
                     </button>
