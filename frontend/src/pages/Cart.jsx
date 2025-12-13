@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../context/CartContext";
+import { formatINR } from "../utils/currency";
 
 const Cart = () => {
   const { cart, loading, updateCartItem, removeFromCart, fetchCart } =
@@ -124,7 +125,7 @@ const Cart = () => {
                       {item.product?.name}
                     </h3>
                     <p className="text-lg font-semibold text-pink-400 mb-4">
-                      ${item.product?.price?.toFixed(2)} each
+                      {formatINR(item.product?.price)} each
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3 bg-gray-700 rounded-xl p-2">
@@ -150,9 +151,8 @@ const Cart = () => {
                       </div>
                       <div className="text-right">
                         <p className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                          $
-                          {((item.product?.price || 0) * item.quantity).toFixed(
-                            2
+                          {formatINR(
+                            (item.product?.price || 0) * item.quantity
                           )}
                         </p>
                       </div>
@@ -191,7 +191,7 @@ const Cart = () => {
                 <div className="flex justify-between text-gray-300">
                   <span>Subtotal</span>
                   <span className="font-semibold text-white">
-                    ${totals.itemsPrice.toFixed(2)}
+                    {formatINR(totals.itemsPrice)}
                   </span>
                 </div>
                 <div className="flex justify-between text-gray-300">
@@ -200,21 +200,21 @@ const Cart = () => {
                     {totals.shippingPrice === 0 ? (
                       <span className="text-green-300">Free</span>
                     ) : (
-                      `$${totals.shippingPrice.toFixed(2)}`
+                      formatINR(totals.shippingPrice)
                     )}
                   </span>
                 </div>
                 <div className="flex justify-between text-gray-300">
                   <span>Tax</span>
                   <span className="font-semibold text-white">
-                    ${totals.taxPrice.toFixed(2)}
+                    {formatINR(totals.taxPrice)}
                   </span>
                 </div>
                 <div className="border-t-2 border-gray-700 pt-4">
                   <div className="flex justify-between">
                     <span className="text-xl font-bold text-white">Total</span>
                     <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                      ${totals.totalPrice.toFixed(2)}
+                      {formatINR(totals.totalPrice)}
                     </span>
                   </div>
                 </div>

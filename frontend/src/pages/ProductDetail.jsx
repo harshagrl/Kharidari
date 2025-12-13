@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import { formatINR } from "../utils/currency";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -106,7 +107,7 @@ const ProductDetail = () => {
                 </h1>
                 <div className="flex items-center space-x-4 mb-6">
                   <span className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    ${product.price.toFixed(2)}
+                    {formatINR(product.price)}
                   </span>
                   {product.rating > 0 && (
                     <div className="flex items-center space-x-2">

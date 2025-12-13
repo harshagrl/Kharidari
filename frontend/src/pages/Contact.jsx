@@ -13,20 +13,22 @@ const Contact = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <h3 className="text-xl font-semibold text-white mb-2">Phone</h3>
-            <p className="text-gray-300">+1 (555) 123-4567</p>
+            <p className="text-gray-300">+919534214839</p>
 
             <h3 className="text-xl font-semibold text-white mt-6 mb-2">
               Email
             </h3>
-            <p className="text-gray-300">support@kharidari.example</p>
+            <p className="text-gray-300">harshkr.agrl@gmail.com</p>
+            <p className="text-gray-300">Ayush@gmail.com</p>
+            <p className="text-gray-300">Nitin@gmail.com</p>
 
             <h3 className="text-xl font-semibold text-white mt-6 mb-2">
               Address
             </h3>
             <p className="text-gray-300">
-              123 Market Street, Suite 400
+              LPU, Grand Truck Road
               <br />
-              City, State ZIP
+              Phagwara, Punjab 144411
             </p>
           </div>
 
@@ -47,7 +49,7 @@ const Contact = () => {
             </h3>
             <p className="text-gray-300">
               For bulk orders, partnerships or press inquiries, please email
-              partnerships@kharidari.example
+              partnerships@kharidari.com
             </p>
           </div>
         </div>

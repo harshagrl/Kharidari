@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { formatINR } from "../utils/currency";
 
 const ProductCard = ({ product }) => {
   return (
@@ -43,7 +44,7 @@ const ProductCard = ({ product }) => {
         <div className="flex items-center justify-between pt-4 border-t border-gray-700">
           <div>
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              ${product.price.toFixed(2)}
+              {formatINR(product.price)}
             </span>
           </div>
           {product.stock === 0 && (

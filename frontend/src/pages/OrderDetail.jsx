@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { formatINR } from "../utils/currency";
 
 const OrderDetail = () => {
   const { id } = useParams();
@@ -83,7 +84,7 @@ const OrderDetail = () => {
                     </p>
                   </div>
                   <p className="text-lg font-semibold">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    {formatINR(item.price * item.quantity)}
                   </p>
                 </div>
               ))}
@@ -112,26 +113,26 @@ const OrderDetail = () => {
               <div className="flex justify-between">
                 <span className="text-gray-300">Items</span>
                 <span className="font-semibold text-white">
-                  ${order.itemsPrice.toFixed(2)}
+                  {formatINR(order.itemsPrice)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-300">Shipping</span>
                 <span className="font-semibold text-white">
-                  ${order.shippingPrice.toFixed(2)}
+                  {formatINR(order.shippingPrice)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-300">Tax</span>
                 <span className="font-semibold text-white">
-                  ${order.taxPrice.toFixed(2)}
+                  {formatINR(order.taxPrice)}
                 </span>
               </div>
               <div className="border-t border-gray-700 pt-2 mt-2">
                 <div className="flex justify-between">
                   <span className="text-lg font-bold text-white">Total</span>
                   <span className="text-lg font-bold text-white">
-                    ${order.totalPrice.toFixed(2)}
+                    {formatINR(order.totalPrice)}
                   </span>
                 </div>
               </div>

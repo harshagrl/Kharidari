@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useCart } from "../context/CartContext";
+import { formatINR } from "../utils/currency";
 
 const Checkout = () => {
   const { cart, fetchCart } = useCart();
@@ -215,7 +216,7 @@ const Checkout = () => {
                     {item.product?.name} x {item.quantity}
                   </span>
                   <span>
-                    ${((item.product?.price || 0) * item.quantity).toFixed(2)}
+                    {formatINR((item.product?.price || 0) * item.quantity)}
                   </span>
                 </div>
               ))}
@@ -224,26 +225,26 @@ const Checkout = () => {
               <div className="flex justify-between">
                 <span className="text-gray-300">Items</span>
                 <span className="font-semibold">
-                  ${totals.itemsPrice.toFixed(2)}
+                  {formatINR(totals.itemsPrice)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-300">Shipping</span>
                 <span className="font-semibold">
-                  ${totals.shippingPrice.toFixed(2)}
+                  {formatINR(totals.shippingPrice)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-300">Tax</span>
                 <span className="font-semibold">
-                  ${totals.taxPrice.toFixed(2)}
+                  {formatINR(totals.taxPrice)}
                 </span>
               </div>
               <div className="border-t border-gray-200 pt-2 mt-2">
                 <div className="flex justify-between">
                   <span className="text-lg font-bold text-white">Total</span>
                   <span className="text-lg font-bold text-white">
-                    ${totals.totalPrice.toFixed(2)}
+                    {formatINR(totals.totalPrice)}
                   </span>
                 </div>
               </div>

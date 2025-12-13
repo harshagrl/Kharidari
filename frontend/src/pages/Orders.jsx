@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { formatINR } from "../utils/currency";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -89,7 +90,7 @@ const Orders = () => {
                 <div className="text-right">
                   <p className="text-sm text-gray-300">Total</p>
                   <p className="text-xl font-bold text-pink-400">
-                    ${order.totalPrice.toFixed(2)}
+                    {formatINR(order.totalPrice)}
                   </p>
                 </div>
               </div>

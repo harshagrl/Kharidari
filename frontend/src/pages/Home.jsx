@@ -23,11 +23,18 @@ const Home = () => {
           axios.get("/api/recommendations"),
           axios.get("/api/recommendations/popular"),
         ]);
-        setRecommendations(recResponse.data);
-        setPopularProducts(popResponse.data);
+        const rec = recResponse.data || [];
+        const pop = popResponse.data || [];
+        // Limit recommendations to first 4
+        const recSlice = rec.slice(0, 4);
+        const recIds = new Set(recSlice.map((p) => p._id));
+        // Exclude any recommended items from popular list, then limit to 4
+        const popFiltered = pop.filter((p) => !recIds.has(p._id)).slice(0, 4);
+        setRecommendations(recSlice);
+        setPopularProducts(popFiltered);
       } else {
         const response = await axios.get("/api/recommendations/popular");
-        setPopularProducts(response.data);
+        setPopularProducts((response.data || []).slice(0, 4));
       }
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -38,7 +45,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700">
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -92,7 +98,7 @@ const Home = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {recommendations.map((product, index) => (
+                {recommendations.slice(0, 4).map((product, index) => (
                   <div
                     key={product._id}
                     style={{ animationDelay: `${index * 0.1}s` }}
@@ -122,7 +128,7 @@ const Home = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {popularProducts.map((product, index) => (
+              {popularProducts.slice(0, 4).map((product, index) => (
                 <div
                   key={product._id}
                   style={{ animationDelay: `${index * 0.1}s` }}
