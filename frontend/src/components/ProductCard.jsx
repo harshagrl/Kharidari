@@ -7,7 +7,7 @@ const ProductCard = ({ product }) => {
       to={`/products/${product._id}`}
       className="group bg-gray-800 rounded-2xl shadow-md overflow-hidden card-hover animate-fade-in"
     >
-      <div className="relative overflow-hidden bg-gradient-to-br from-gray-700 to-gray-800">
+      <div className="relative overflow-hidden bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl">
         <img
           src={product.image || "https://via.placeholder.com/300"}
           alt={product.name}
