@@ -35,7 +35,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500",
     category: "Accessories",
     stock: 75,
-    rating: 4.3,
+    rating: 3.8,
     numReviews: 45,
   },
   {
@@ -69,7 +69,7 @@ const products = [
       "https://m.media-amazon.com/images/I/61d049-EBiL._AC_UF894,1000_QL80_.jpg",
     category: "Sports",
     stock: 60,
-    rating: 4.2,
+    rating: 3.6,
     numReviews: 34,
   },
   {
@@ -91,7 +91,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500",
     category: "Home & Kitchen",
     stock: 55,
-    rating: 4.3,
+    rating: 3.9,
     numReviews: 78,
   },
   {
@@ -113,7 +113,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=500",
     category: "Electronics",
     stock: 70,
-    rating: 4.4,
+    rating: 3.5,
     numReviews: 123,
   },
   {
@@ -124,7 +124,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500",
     category: "Clothing",
     stock: 150,
-    rating: 4.1,
+    rating: 3.4,
     numReviews: 234,
   },
   {
@@ -135,7 +135,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=500",
     category: "Accessories",
     stock: 200,
-    rating: 4.3,
+    rating: 3.7,
     numReviews: 189,
   },
 ];
