@@ -23,8 +23,8 @@ const Home = () => {
           axios.get("/api/recommendations"),
           axios.get("/api/recommendations/popular"),
         ]);
-        const rec = recResponse.data || [];
-        const pop = popResponse.data || [];
+        const rec = Array.isArray(recResponse.data) ? recResponse.data : [];
+        const pop = Array.isArray(popResponse.data) ? popResponse.data : [];
         // Limit recommendations to first 4
         const recSlice = rec.slice(0, 4);
         const recIds = new Set(recSlice.map((p) => p._id));
@@ -34,7 +34,8 @@ const Home = () => {
         setPopularProducts(popFiltered);
       } else {
         const response = await axios.get("/api/recommendations/popular");
-        setPopularProducts((response.data || []).slice(0, 4));
+        const data = Array.isArray(response.data) ? response.data : [];
+        setPopularProducts(data.slice(0, 4));
       }
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -98,15 +99,17 @@ const Home = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {recommendations.slice(0, 4).map((product, index) => (
-                  <div
-                    key={product._id}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                    className="animate-fade-in"
-                  >
-                    <ProductCard product={product} />
-                  </div>
-                ))}
+                {(Array.isArray(recommendations) ? recommendations : [])
+                  .slice(0, 4)
+                  .map((product, index) => (
+                    <div
+                      key={product._id}
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                      className="animate-fade-in"
+                    >
+                      <ProductCard product={product} />
+                    </div>
+                  ))}
               </div>
             )}
           </section>
@@ -128,15 +131,17 @@ const Home = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {popularProducts.slice(0, 4).map((product, index) => (
-                <div
-                  key={product._id}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                  className="animate-fade-in"
-                >
-                  <ProductCard product={product} />
-                </div>
-              ))}
+              {(Array.isArray(popularProducts) ? popularProducts : [])
+                .slice(0, 4)
+                .map((product, index) => (
+                  <div
+                    key={product._id}
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                    className="animate-fade-in"
+                  >
+                    <ProductCard product={product} />
+                  </div>
+                ))}
             </div>
           )}
         </section>

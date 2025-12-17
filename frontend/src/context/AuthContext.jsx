@@ -16,7 +16,16 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    let token = null;
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        token = localStorage.getItem("token");
+      }
+    } catch (err) {
+      // localStorage may be blocked in some contexts (extensions/iframe/privacy)
+      token = null;
+    }
+
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       fetchUser();
@@ -40,7 +49,13 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const response = await axios.post("/api/auth/login", { email, password });
     const { token, ...userData } = response.data;
-    localStorage.setItem("token", token);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.setItem("token", token);
+      }
+    } catch (err) {
+      // ignore storage errors
+    }
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setUser(userData);
     return response.data;
@@ -53,14 +68,26 @@ export const AuthProvider = ({ children }) => {
       password,
     });
     const { token, ...userData } = response.data;
-    localStorage.setItem("token", token);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.setItem("token", token);
+      }
+    } catch (err) {
+      // ignore storage errors
+    }
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setUser(userData);
     return response.data;
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.removeItem("token");
+      }
+    } catch (err) {
+      // ignore storage errors
+    }
     delete axios.defaults.headers.common["Authorization"];
     setUser(null);
   };
