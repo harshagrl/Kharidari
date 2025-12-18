@@ -34,7 +34,7 @@ A full-stack e-commerce shopping cart application built with React.js, Tailwind 
 
 ## Project Structure
 
-```
+````
 shopping-Cart-System/
 ├── backend/
 │   ├── models/          # MongoDB models (User, Product, Cart, Order)
@@ -45,109 +45,24 @@ shopping-Cart-System/
 │   └── package.json
 ├── frontend/
 │   ├── src/
-│   │   ├── components/  # React components
-│   │   ├── pages/       # Page components
-│   │   ├── context/     # React Context (Auth, Cart)
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   └── package.json
-└── README.md
-```
+### Frontend Deployment
 
-## Prerequisites
+Frontend hosting is independent from the backend and can be deployed to any static host (Netlify, Vercel, Surge, GitHub Pages, or an S3/CloudFront setup). Netlify-specific configuration files have been removed from this repository (`frontend/netlify.toml` and `frontend/public/_redirects`).
 
-Before you begin, ensure you have the following installed:
+General steps to deploy the frontend:
 
-- Node.js (v16 or higher)
-- MongoDB (local installation or MongoDB Atlas account)
-- npm or yarn
+- Build the production bundle:
 
-## Local Setup Instructions
+  ```bash
+  cd frontend
+  npm run build
+````
 
-### 1. Clone the Repository
+- Configure your host to publish the `dist` folder (set build command `npm run build` and publish directory `frontend/dist`).
+- Set the production API base URL using the `VITE_API_URL` environment variable in your host's environment settings (e.g. `https://your-backend-url.onrender.com`).
 
-```bash
-git clone <repository-url>
-cd shopping-Cart-System
-```
+If you previously had a Netlify site and want to remove it entirely, follow the Netlify deletion steps below.
 
-### 2. Backend Setup
-
-```bash
-# Navigate to backend directory
-cd backend
-
-# Install dependencies
-npm install
-
-# Create a .env file
-cp .env.example .env
-```
-
-Edit the `.env` file with your MongoDB connection string:
-
-```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/
-JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
-NODE_ENV=development
-```
-
-**For MongoDB Atlas (Cloud):**
-
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/shopping-cart?retryWrites=true&w=majority
-```
-
-### 3. Seed the Database
-
-```bash
-# Run the seed script to populate sample products
-node scripts/seed.js
-```
-
-### 4. Start the Backend Server
-
-```bash
-# Development mode (with nodemon)
-npm run dev
-
-# Production mode
-npm start
-```
-
-The backend server will run on `http://localhost:5000`
-
-### 5. Frontend Setup
-
-Open a new terminal window:
-
-```bash
-# Navigate to frontend directory
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
-```
-
-The frontend will run on `http://localhost:3000`
-
-### 6. Access the Application
-
-Open your browser and navigate to:
-
-```
-http://localhost:3000
-```
-
-## API Endpoints
-
-### Authentication
-
-- `POST /api/auth/register` - Register a new user
 - `POST /api/auth/login` - Login user
 - `GET /api/auth/me` - Get current user (Protected)
 
