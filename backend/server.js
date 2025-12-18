@@ -11,14 +11,12 @@ import recommendationRoutes from "./routes/recommendations.js";
 dotenv.config();
 
 const app = express();
-const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? ["https://kharidari-shop.netlify.app/"]
-      : ["http://localhost:3000"],
-  credentials: true,
-};
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

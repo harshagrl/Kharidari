@@ -70,245 +70,114 @@ If you previously had a Netlify site and want to remove it entirely, follow the 
 
 - `GET /api/products` - Get all products (with pagination, search, category filter)
 - `GET /api/products/:id` - Get single product
-- `GET /api/products/categories/list` - Get all categories
 
-### Cart (Protected)
+# Kharidari - Shopping Cart System
 
-- `GET /api/cart` - Get user's cart
-- `POST /api/cart` - Add item to cart
-- `PUT /api/cart/:itemId` - Update cart item quantity
-- `DELETE /api/cart/:itemId` - Remove item from cart
-- `DELETE /api/cart` - Clear cart
+A full-stack e-commerce shopping cart application built with React, Tailwind CSS, Node.js, Express, MongoDB, and JWT authentication.
 
-### Orders (Protected)
+## Features
 
-- `POST /api/orders` - Create new order
-- `GET /api/orders` - Get user's orders
-- `GET /api/orders/:id` - Get single order
-- `PUT /api/orders/:id/pay` - Mark order as paid
+- User authentication (Register/Login) with JWT
+- Product browsing with search and category filters
+- Shopping cart functionality (add, update quantity, remove items)
+- Secure checkout process
+- Order management and tracking
+- Product recommendations based on purchase history
+- Responsive design with Tailwind CSS
 
-### Recommendations (Protected)
+## Tech Stack
 
-- `GET /api/recommendations` - Get personalized recommendations
-- `GET /api/recommendations/popular` - Get popular products
+- Frontend: React 18, Vite, Tailwind CSS
+- Backend: Node.js, Express, MongoDB (Mongoose)
 
-## Deployment to Netlify
+## Project Structure
 
-### Backend Deployment
-
-The backend needs to be deployed separately. Netlify is primarily for frontend hosting. For backend, consider:
-
-1. **Heroku** (Recommended for backend)
-2. **Railway**
-3. **Render**
-4. **DigitalOcean App Platform**
-
-#### Deploying Backend to Heroku:
-
-```bash
-# Install Heroku CLI and login
-heroku login
-
-# Create a new Heroku app
-cd backend
-heroku create your-app-name
-
-# Set environment variables
-heroku config:set MONGODB_URI=your_mongodb_connection_string
-heroku config:set JWT_SECRET=your_secret_key
-heroku config:set NODE_ENV=production
-
-# Deploy
-git push heroku main
+```
+shopping-Cart-System/
+├── backend/
+├── frontend/
+└── README.md
 ```
 
-### Frontend Deployment to Netlify
+## Frontend Deployment (Vercel)
 
-#### Option 1: Using Netlify CLI
+This repository no longer contains Netlify-specific configuration. To deploy the frontend on Vercel:
+
+1. Push your repo to GitHub, GitLab, or Bitbucket (if not already pushed).
+2. Go to https://vercel.com and import your project.
+
+Recommended Vercel settings for this project (frontend subfolder):
+
+- Root directory: `frontend` (set this in the import settings)
+- Framework Preset: `Vite` or `Other`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Environment Variables: add `VITE_API_URL` with your backend URL (e.g. `https://your-backend.onrender.com`)
+
+Alternative (Vercel CLI):
 
 ```bash
-# Install Netlify CLI globally
-npm install -g netlify-cli
-
-# Navigate to frontend directory
+# from repo root
+npm i -g vercel
 cd frontend
-
-# Build the project
-npm run build
-
-# Login to Netlify
-netlify login
-
-# Initialize and deploy
-netlify init
-netlify deploy --prod
+vercel login
+vercel --prod
 ```
 
-#### Option 2: Using Netlify Dashboard
+Notes:
 
-1. **Build the Frontend:**
+- Ensure `VITE_API_URL` is set in Vercel's Project → Settings → Environment Variables.
+- If your backend is on Render, use its URL as `VITE_API_URL` (for example: `https://kharidari-backend.onrender.com`).
 
-   ```bash
-   cd frontend
-   npm run build
-   ```
+## Backend (Render)
 
-2. **Create `netlify.toml` file** in the frontend directory:
+Keep your backend deployed on Render (or any other provider). Make sure the backend URL is set as `VITE_API_URL` in Vercel so the frontend calls the correct API.
 
-   ```toml
-   [build]
-     command = "npm run build"
-     publish = "dist"
+Update CORS in `backend/server.js` to accept the deployed frontend origin. Example:
 
-   [[redirects]]
-     from = "/*"
-     to = "/index.html"
-     status = 200
-   ```
+```js
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? [process.env.FRONTEND_URL] // set FRONTEND_URL to your Vercel URL in Render/Env
+      : ["http://localhost:3000"],
+  credentials: true,
+};
+app.use(cors(corsOptions));
+```
 
-3. **Update API Base URL:**
+Set `FRONTEND_URL` in your backend host's environment variables to your Vercel deployment URL.
 
-   Create a `.env.production` file in the frontend directory:
+## Build & Run Locally
 
-   ```env
-   VITE_API_URL=https://your-backend-url.herokuapp.com
-   ```
+Frontend:
 
-   Update `vite.config.js` to use the environment variable:
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-   ```js
-   export default defineConfig({
-     plugins: [react()],
-     server: {
-       port: 3000,
-       proxy: {
-         "/api": {
-           target: import.meta.env.VITE_API_URL || "http://localhost:5000",
-           changeOrigin: true,
-         },
-       },
-     },
-   });
-   ```
+Backend:
 
-4. **Deploy to Netlify:**
-
-   - Go to [Netlify](https://www.netlify.com/)
-   - Sign up/Login
-   - Click "Add new site" → "Deploy manually"
-   - Drag and drop the `dist` folder from your frontend directory
-   - Or connect your Git repository for automatic deployments
-
-5. **Set Environment Variables in Netlify:**
-   - Go to Site settings → Environment variables
-   - Add `VITE_API_URL` with your backend URL
-
-#### Option 3: Using Git Integration (Recommended)
-
-1. **Push your code to GitHub/GitLab/Bitbucket**
-
-2. **Connect to Netlify:**
-
-   - Login to Netlify
-   - Click "New site from Git"
-   - Connect your repository
-   - Set build settings:
-     - **Base directory:** `frontend`
-     - **Build command:** `npm run build`
-     - **Publish directory:** `frontend/dist`
-
-3. **Add Environment Variables:**
-
-   - Site settings → Environment variables
-   - Add `VITE_API_URL` = `https://your-backend-url.herokuapp.com`
-
-4. **Add `_redirects` file** in `frontend/public/`:
-
-   ```
-   /*    /index.html   200
-   ```
-
-5. **Deploy!** Netlify will automatically build and deploy your site.
-
-### Post-Deployment Steps
-
-1. **Update CORS settings** in backend `server.js`:
-
-   ```js
-   const corsOptions = {
-     origin:
-       process.env.NODE_ENV === "production"
-         ? ["https://your-netlify-app.netlify.app"]
-         : ["http://localhost:3000"],
-     credentials: true,
-   };
-   app.use(cors(corsOptions));
-   ```
-
-2. **Configure Frontend API URL:**
-
-   In production, the frontend needs to call your backend API. You have two options:
-
-   **Option A: Environment Variable (Recommended)**
-
-   - Set `VITE_API_URL` in Netlify environment variables
-   - Update axios calls to use: `axios.get(\`${import.meta.env.VITE_API_URL}/api/endpoint\`)`
-
-   **Option B: Netlify Redirects**
-
-   - Add to `netlify.toml`:
-
-   ```toml
-   [[redirects]]
-     from = "/api/*"
-     to = "https://your-backend.herokuapp.com/api/:splat"
-     status = 200
-     force = true
-   ```
-
-   - This allows keeping `/api` calls in the frontend code
-
-3. **Test the deployed application**
+```bash
+cd backend
+npm install
+# set .env then
+npm run dev
+```
 
 ## Environment Variables
 
-### Backend (.env)
-
-- `PORT` - Server port (default: 5000)
-- `MONGODB_URI` - MongoDB connection string
-- `JWT_SECRET` - Secret key for JWT tokens
-- `NODE_ENV` - Environment (development/production)
-
-### Frontend (.env.production)
-
-- `VITE_API_URL` - Backend API URL for production
-
-## Default Test Credentials
-
-After seeding, you can create a new account through the registration page.
-
-## Troubleshooting
-
-### MongoDB Connection Issues
-
-- Ensure MongoDB is running locally, or
-- Check your MongoDB Atlas connection string
-- Verify network access in MongoDB Atlas if using cloud
-
-### CORS Errors
-
-- Update CORS settings in `backend/server.js` to include your frontend URL
-
-### Build Errors
-
-- Ensure all dependencies are installed (`npm install`)
-- Check Node.js version compatibility
-- Clear `node_modules` and reinstall if needed
-
-## License
-
-This project is open source and available under the MIT License.
+- Backend (`backend/.env`): `PORT`, `MONGODB_URI`, `JWT_SECRET`, `NODE_ENV`
+- Frontend (`frontend/.env.production` or Vercel env): `VITE_API_URL`
 
 ## Support
 
-For issues and questions, please open an issue in the repository.
+If you want, I can:
+
+- Remove any leftover Netlify files from the repo entirely (already removed from `frontend/`).
+- Add a short `vercel.json` or a project README snippet for Vercel-specific settings.
+- Provide the exact `vercel` CLI commands and help run the deploy interactively.
+
+Open an issue if you need help with deployment details or CORS configuration.
