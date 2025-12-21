@@ -164,6 +164,7 @@ Backend:
 cd backend
 npm install
 # set .env then
+npm run seed
 npm run dev
 ```
 
