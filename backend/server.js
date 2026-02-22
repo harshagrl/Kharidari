@@ -36,14 +36,18 @@ mongoose
   .connect(MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
   })
   .catch((error) => {
     console.error("MongoDB connection error:", error);
-    process.exit(1);
   });
+
+// No need for app.listen() in Vercel as it handles the serverless execution.
+// However, we can keep it for local development if needed, wrapped in a check.
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 export default app;
