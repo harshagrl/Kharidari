@@ -26,7 +26,7 @@ const Products = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get("/api/products/categories/list");
-      setCategories(response.data);
+      setCategories(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -42,8 +42,8 @@ const Products = () => {
       params.append("limit", "12");
 
       const response = await axios.get(`/api/products?${params.toString()}`);
-      setProducts(response.data.products);
-      setTotalPages(response.data.totalPages);
+      setProducts(Array.isArray(response.data?.products) ? response.data.products : []);
+      setTotalPages(response.data?.totalPages || 1);
       setSearchParams(params);
     } catch (error) {
       console.error("Error fetching products:", error);
